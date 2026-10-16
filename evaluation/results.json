@@ -1,0 +1,1049 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-16T22:26:10.782265+00:00",
+  "dataset_path": "D:\\hybrid_rag\\evaluation\\retrieval_cases.json",
+  "dataset_sha256": "89f1d5c651c862070cd300cf83e75f5f3038314d67e3f75f03c67db4d538489b",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_device": "cpu",
+  "index_version": "64dd838de393481a4927e044813fd89d978566c3bac7c54f3d394849a8487b2c",
+  "index_versions_match": true,
+  "configuration": {
+    "dense_top_k": 6,
+    "bm25_top_k": 6,
+    "fusion_top_k": 5,
+    "rrf_k": 60
+  },
+  "timing_seconds": {
+    "model_load": 3.924762599999667,
+    "dense_seconds": 0.0706205000024056,
+    "bm25_seconds": 0.00559600000269711,
+    "mean_query": {
+      "dense": 0.012201880000066011,
+      "bm25": 0.00047701999719720336,
+      "hybrid": 0.012730019996524788
+    }
+  },
+  "metrics": {
+    "dense": {
+      "mrr": 1.0,
+      "recall_at_1": 0.875,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "unsupported_nonempty_rate": 1.0
+    },
+    "bm25": {
+      "mrr": 1.0,
+      "recall_at_1": 0.875,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "unsupported_nonempty_rate": 1.0
+    },
+    "hybrid": {
+      "mrr": 1.0,
+      "recall_at_1": 0.875,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "unsupported_nonempty_rate": 1.0
+    }
+  },
+  "page_citation_chunk_retrieval_rate": 1.0,
+  "rrf_parameter_sweep": {
+    "candidates": [
+      {
+        "candidate_k": 3,
+        "rrf_k": 10,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 0.875,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      },
+      {
+        "candidate_k": 3,
+        "rrf_k": 30,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 0.875,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      },
+      {
+        "candidate_k": 3,
+        "rrf_k": 60,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 0.875,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      },
+      {
+        "candidate_k": 5,
+        "rrf_k": 10,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 0.875,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      },
+      {
+        "candidate_k": 5,
+        "rrf_k": 30,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 0.875,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      },
+      {
+        "candidate_k": 5,
+        "rrf_k": 60,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 0.875,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      },
+      {
+        "candidate_k": 10,
+        "rrf_k": 10,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 0.875,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      },
+      {
+        "candidate_k": 10,
+        "rrf_k": 30,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 0.875,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      },
+      {
+        "candidate_k": 10,
+        "rrf_k": 60,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 0.875,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      }
+    ],
+    "best_by_mrr_then_recall_at_3": {
+      "candidate_k": 3,
+      "rrf_k": 10,
+      "metrics": {
+        "mrr": 1.0,
+        "recall_at_1": 0.875,
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "unsupported_nonempty_rate": 1.0
+      }
+    }
+  },
+  "chunking_parameter_sweep": {
+    "candidates": [
+      {
+        "chunk_size": 160,
+        "chunk_overlap": 0,
+        "chunk_count": 6,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 0.875,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      },
+      {
+        "chunk_size": 160,
+        "chunk_overlap": 40,
+        "chunk_count": 6,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 0.875,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      },
+      {
+        "chunk_size": 320,
+        "chunk_overlap": 80,
+        "chunk_count": 4,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 0.875,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      },
+      {
+        "chunk_size": 800,
+        "chunk_overlap": 120,
+        "chunk_count": 3,
+        "metrics": {
+          "mrr": 1.0,
+          "recall_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "unsupported_nonempty_rate": 1.0
+        }
+      }
+    ],
+    "best_by_mrr_then_recall_at_3": {
+      "chunk_size": 800,
+      "chunk_overlap": 120,
+      "metrics": {
+        "mrr": 1.0,
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "unsupported_nonempty_rate": 1.0
+      }
+    },
+    "relevance_mapping": "A re-chunked result is relevant when it overlaps at least half of a manually labeled source chunk."
+  },
+  "generation_quality": {
+    "citation_validity": null,
+    "faithfulness": null,
+    "abstention_quality": null,
+    "not_measured_reason": "This retrieval-only run makes no Gemini requests. Citation and answer quality require a separately approved, authenticated generation evaluation."
+  },
+  "queries": [
+    {
+      "case_id": "exact-keyword-aes-256",
+      "category": "exact_keyword",
+      "query": "Which cipher protects backup archives?",
+      "answerable": true,
+      "reference_answer": "Backup archives are encrypted with AES-256.",
+      "relevant_chunk_ids": [
+        "backup-encryption"
+      ],
+      "rankings": {
+        "dense": [
+          "backup-encryption",
+          "key-rotation",
+          "key-replacement",
+          "account-recovery",
+          "printer-maintenance",
+          "emergency-contact"
+        ],
+        "bm25": [
+          "backup-encryption"
+        ],
+        "hybrid": [
+          "backup-encryption",
+          "key-rotation",
+          "key-replacement",
+          "account-recovery",
+          "printer-maintenance"
+        ]
+      },
+      "ranked_sources": {
+        "dense": [
+          {
+            "chunk_id": "backup-encryption",
+            "source_path": "handbook/security.pdf",
+            "page_number": 4,
+            "section_heading": "Backup encryption",
+            "score": 0.7280058860778809
+          },
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 0.3304671347141266
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.29003220796585083
+          },
+          {
+            "chunk_id": "account-recovery",
+            "source_path": "handbook/access.pdf",
+            "page_number": 7,
+            "section_heading": "Account recovery",
+            "score": 0.1134243905544281
+          },
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 0.10745124518871307
+          },
+          {
+            "chunk_id": "emergency-contact",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 12,
+            "section_heading": "Emergency contacts",
+            "score": -0.048330165445804596
+          }
+        ],
+        "bm25": [
+          {
+            "chunk_id": "backup-encryption",
+            "source_path": "handbook/security.pdf",
+            "page_number": 4,
+            "section_heading": "Backup encryption",
+            "score": 2.66160395670889
+          }
+        ],
+        "hybrid": [
+          {
+            "chunk_id": "backup-encryption",
+            "source_path": "handbook/security.pdf",
+            "page_number": 4,
+            "section_heading": "Backup encryption",
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 0.016129032258064516
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.015873015873015872
+          },
+          {
+            "chunk_id": "account-recovery",
+            "source_path": "handbook/access.pdf",
+            "page_number": 7,
+            "section_heading": "Account recovery",
+            "score": 0.015625
+          },
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 0.015384615384615385
+          }
+        ]
+      },
+      "dense_bm25_disagreement": {
+        "different_order": true,
+        "dense_only_top_k": [
+          "key-rotation",
+          "key-replacement",
+          "account-recovery",
+          "printer-maintenance",
+          "emergency-contact"
+        ],
+        "bm25_only_top_k": []
+      },
+      "page_citation_chunk_retrieved": null,
+      "latency_ms": {
+        "dense": 15.375000002677552,
+        "bm25": 0.44750000233761966,
+        "hybrid": 14.482300000963733
+      }
+    },
+    {
+      "case_id": "semantic-account-recovery",
+      "category": "semantic_paraphrase",
+      "query": "I forgot my password and cannot sign in. How is access restored?",
+      "answerable": true,
+      "reference_answer": "An administrator verifies identity and issues a one-time password reset link.",
+      "relevant_chunk_ids": [
+        "account-recovery"
+      ],
+      "rankings": {
+        "dense": [
+          "account-recovery",
+          "key-replacement",
+          "key-rotation",
+          "backup-encryption",
+          "emergency-contact",
+          "printer-maintenance"
+        ],
+        "bm25": [
+          "account-recovery",
+          "printer-maintenance",
+          "emergency-contact",
+          "key-rotation",
+          "key-replacement"
+        ],
+        "hybrid": [
+          "account-recovery",
+          "key-replacement",
+          "key-rotation",
+          "printer-maintenance",
+          "emergency-contact"
+        ]
+      },
+      "ranked_sources": {
+        "dense": [
+          {
+            "chunk_id": "account-recovery",
+            "source_path": "handbook/access.pdf",
+            "page_number": 7,
+            "section_heading": "Account recovery",
+            "score": 0.5109068751335144
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.34360238909721375
+          },
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 0.29579657316207886
+          },
+          {
+            "chunk_id": "backup-encryption",
+            "source_path": "handbook/security.pdf",
+            "page_number": 4,
+            "section_heading": "Backup encryption",
+            "score": 0.20573720335960388
+          },
+          {
+            "chunk_id": "emergency-contact",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 12,
+            "section_heading": "Emergency contacts",
+            "score": 0.18308138847351074
+          },
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": -0.004040278494358063
+          }
+        ],
+        "bm25": [
+          {
+            "chunk_id": "account-recovery",
+            "source_path": "handbook/access.pdf",
+            "page_number": 7,
+            "section_heading": "Account recovery",
+            "score": 2.5151682830845603
+          },
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 0.3286295494006255
+          },
+          {
+            "chunk_id": "emergency-contact",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 12,
+            "section_heading": "Emergency contacts",
+            "score": 0.31847156676317057
+          },
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 0.28342833781724863
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.25533264209970585
+          }
+        ],
+        "hybrid": [
+          {
+            "chunk_id": "account-recovery",
+            "source_path": "handbook/access.pdf",
+            "page_number": 7,
+            "section_heading": "Account recovery",
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.0315136476426799
+          },
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 0.03149801587301587
+          },
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 0.03128054740957967
+          },
+          {
+            "chunk_id": "emergency-contact",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 12,
+            "section_heading": "Emergency contacts",
+            "score": 0.03125763125763126
+          }
+        ]
+      },
+      "dense_bm25_disagreement": {
+        "different_order": true,
+        "dense_only_top_k": [
+          "backup-encryption"
+        ],
+        "bm25_only_top_k": []
+      },
+      "page_citation_chunk_retrieved": null,
+      "latency_ms": {
+        "dense": 12.164399988250807,
+        "bm25": 0.5392000020947307,
+        "hybrid": 12.218099989695475
+      }
+    },
+    {
+      "case_id": "multi-chunk-key-rotation",
+      "category": "multi_chunk",
+      "query": "How often are recovery keys rotated, and how is an old key replaced?",
+      "answerable": true,
+      "reference_answer": "Keys are rotated every 90 days; a replacement is validated with a restore before the old key is revoked.",
+      "relevant_chunk_ids": [
+        "key-rotation",
+        "key-replacement"
+      ],
+      "rankings": {
+        "dense": [
+          "key-rotation",
+          "key-replacement",
+          "backup-encryption",
+          "account-recovery",
+          "printer-maintenance",
+          "emergency-contact"
+        ],
+        "bm25": [
+          "key-rotation",
+          "key-replacement",
+          "backup-encryption",
+          "account-recovery",
+          "printer-maintenance",
+          "emergency-contact"
+        ],
+        "hybrid": [
+          "key-rotation",
+          "key-replacement",
+          "backup-encryption",
+          "account-recovery",
+          "printer-maintenance"
+        ]
+      },
+      "ranked_sources": {
+        "dense": [
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 0.7755961418151855
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.6490346193313599
+          },
+          {
+            "chunk_id": "backup-encryption",
+            "source_path": "handbook/security.pdf",
+            "page_number": 4,
+            "section_heading": "Backup encryption",
+            "score": 0.3161182999610901
+          },
+          {
+            "chunk_id": "account-recovery",
+            "source_path": "handbook/access.pdf",
+            "page_number": 7,
+            "section_heading": "Account recovery",
+            "score": 0.2866399884223938
+          },
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 0.23922638595104218
+          },
+          {
+            "chunk_id": "emergency-contact",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 12,
+            "section_heading": "Emergency contacts",
+            "score": 0.05199047923088074
+          }
+        ],
+        "bm25": [
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 3.247779667307608
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 2.806535150653642
+          },
+          {
+            "chunk_id": "backup-encryption",
+            "source_path": "handbook/security.pdf",
+            "page_number": 4,
+            "section_heading": "Backup encryption",
+            "score": 2.4901050439255976
+          },
+          {
+            "chunk_id": "account-recovery",
+            "source_path": "handbook/access.pdf",
+            "page_number": 7,
+            "section_heading": "Account recovery",
+            "score": 1.8131749319482158
+          },
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 0.3286295494006255
+          },
+          {
+            "chunk_id": "emergency-contact",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 12,
+            "section_heading": "Emergency contacts",
+            "score": 0.31847156676317057
+          }
+        ],
+        "hybrid": [
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.03225806451612903
+          },
+          {
+            "chunk_id": "backup-encryption",
+            "source_path": "handbook/security.pdf",
+            "page_number": 4,
+            "section_heading": "Backup encryption",
+            "score": 0.031746031746031744
+          },
+          {
+            "chunk_id": "account-recovery",
+            "source_path": "handbook/access.pdf",
+            "page_number": 7,
+            "section_heading": "Account recovery",
+            "score": 0.03125
+          },
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 0.03076923076923077
+          }
+        ]
+      },
+      "dense_bm25_disagreement": {
+        "different_order": false,
+        "dense_only_top_k": [],
+        "bm25_only_top_k": []
+      },
+      "page_citation_chunk_retrieved": null,
+      "latency_ms": {
+        "dense": 11.232200005906634,
+        "bm25": 0.5478999955812469,
+        "hybrid": 12.430299990228377
+      }
+    },
+    {
+      "case_id": "unsupported-printer-warranty",
+      "category": "unsupported",
+      "query": "How long is the printer warranty?",
+      "answerable": false,
+      "reference_answer": "The corpus does not specify a printer warranty.",
+      "relevant_chunk_ids": [],
+      "rankings": {
+        "dense": [
+          "printer-maintenance",
+          "key-rotation",
+          "account-recovery",
+          "key-replacement",
+          "emergency-contact",
+          "backup-encryption"
+        ],
+        "bm25": [
+          "printer-maintenance",
+          "key-replacement",
+          "emergency-contact",
+          "backup-encryption",
+          "key-rotation"
+        ],
+        "hybrid": [
+          "printer-maintenance",
+          "key-replacement",
+          "key-rotation",
+          "emergency-contact",
+          "backup-encryption"
+        ]
+      },
+      "ranked_sources": {
+        "dense": [
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 0.5124807357788086
+          },
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 0.13828271627426147
+          },
+          {
+            "chunk_id": "account-recovery",
+            "source_path": "handbook/access.pdf",
+            "page_number": 7,
+            "section_heading": "Account recovery",
+            "score": 0.11461300402879715
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.041847869753837585
+          },
+          {
+            "chunk_id": "emergency-contact",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 12,
+            "section_heading": "Emergency contacts",
+            "score": 0.004574664868414402
+          },
+          {
+            "chunk_id": "backup-encryption",
+            "source_path": "handbook/security.pdf",
+            "page_number": 4,
+            "section_heading": "Backup encryption",
+            "score": -0.029357578605413437
+          }
+        ],
+        "bm25": [
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 1.911767920620818
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.37861165507673294
+          },
+          {
+            "chunk_id": "emergency-contact",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 12,
+            "section_heading": "Emergency contacts",
+            "score": 0.31847156676317057
+          },
+          {
+            "chunk_id": "backup-encryption",
+            "source_path": "handbook/security.pdf",
+            "page_number": 4,
+            "section_heading": "Backup encryption",
+            "score": 0.29992982594892664
+          },
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 0.28342833781724863
+          }
+        ],
+        "hybrid": [
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.031754032258064516
+          },
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 0.0315136476426799
+          },
+          {
+            "chunk_id": "emergency-contact",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 12,
+            "section_heading": "Emergency contacts",
+            "score": 0.03125763125763126
+          },
+          {
+            "chunk_id": "backup-encryption",
+            "source_path": "handbook/security.pdf",
+            "page_number": 4,
+            "section_heading": "Backup encryption",
+            "score": 0.030776515151515152
+          }
+        ]
+      },
+      "dense_bm25_disagreement": {
+        "different_order": true,
+        "dense_only_top_k": [
+          "account-recovery"
+        ],
+        "bm25_only_top_k": []
+      },
+      "page_citation_chunk_retrieved": null,
+      "latency_ms": {
+        "dense": 10.655400008545257,
+        "bm25": 0.35579998802859336,
+        "hybrid": 11.64900000730995
+      }
+    },
+    {
+      "case_id": "page-citation-emergency-contact",
+      "category": "page_citation",
+      "query": "What number should be called for a building emergency, and which page lists it?",
+      "answerable": true,
+      "reference_answer": "Call Facilities at 555-0100; the information is on page 12.",
+      "relevant_chunk_ids": [
+        "emergency-contact"
+      ],
+      "rankings": {
+        "dense": [
+          "emergency-contact",
+          "key-rotation",
+          "key-replacement",
+          "printer-maintenance",
+          "account-recovery",
+          "backup-encryption"
+        ],
+        "bm25": [
+          "emergency-contact",
+          "key-rotation",
+          "printer-maintenance",
+          "key-replacement",
+          "account-recovery"
+        ],
+        "hybrid": [
+          "emergency-contact",
+          "key-rotation",
+          "key-replacement",
+          "printer-maintenance",
+          "account-recovery"
+        ]
+      },
+      "ranked_sources": {
+        "dense": [
+          {
+            "chunk_id": "emergency-contact",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 12,
+            "section_heading": "Emergency contacts",
+            "score": 0.736575722694397
+          },
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 0.13867363333702087
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.12638898193836212
+          },
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 0.08605090528726578
+          },
+          {
+            "chunk_id": "account-recovery",
+            "source_path": "handbook/access.pdf",
+            "page_number": 7,
+            "section_heading": "Account recovery",
+            "score": 0.058335788547992706
+          },
+          {
+            "chunk_id": "backup-encryption",
+            "source_path": "handbook/security.pdf",
+            "page_number": 4,
+            "section_heading": "Backup encryption",
+            "score": 0.027659807354211807
+          }
+        ],
+        "bm25": [
+          {
+            "chunk_id": "emergency-contact",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 12,
+            "section_heading": "Emergency contacts",
+            "score": 4.557689087966654
+          },
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 1.5410124793595288
+          },
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 0.3286295494006255
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.25533264209970585
+          },
+          {
+            "chunk_id": "account-recovery",
+            "source_path": "handbook/access.pdf",
+            "page_number": 7,
+            "section_heading": "Account recovery",
+            "score": 0.0
+          }
+        ],
+        "hybrid": [
+          {
+            "chunk_id": "emergency-contact",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 12,
+            "section_heading": "Emergency contacts",
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk_id": "key-rotation",
+            "source_path": "handbook/security.pdf",
+            "page_number": 10,
+            "section_heading": "Recovery key rotation",
+            "score": 0.03225806451612903
+          },
+          {
+            "chunk_id": "key-replacement",
+            "source_path": "handbook/security.pdf",
+            "page_number": 11,
+            "section_heading": "Recovery key procedure",
+            "score": 0.03149801587301587
+          },
+          {
+            "chunk_id": "printer-maintenance",
+            "source_path": "handbook/facilities.pdf",
+            "page_number": 18,
+            "section_heading": "Printer maintenance",
+            "score": 0.03149801587301587
+          },
+          {
+            "chunk_id": "account-recovery",
+            "source_path": "handbook/access.pdf",
+            "page_number": 7,
+            "section_heading": "Account recovery",
+            "score": 0.03076923076923077
+          }
+        ]
+      },
+      "dense_bm25_disagreement": {
+        "different_order": true,
+        "dense_only_top_k": [
+          "backup-encryption"
+        ],
+        "bm25_only_top_k": []
+      },
+      "page_citation_chunk_retrieved": true,
+      "latency_ms": {
+        "dense": 11.58239999494981,
+        "bm25": 0.494699997943826,
+        "hybrid": 12.870399994426407
+      }
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "description": "Small synthetic retrieval benchmark with manually assigned relevant chunks.",
+  "corpus": [
+    {
+      "chunk_id": "backup-encryption",
+      "document_id": "security-handbook",
+      "source_path": "handbook/security.pdf",
+      "file_name": "security.pdf",
+      "file_type": "pdf",
+      "chunk_index": 0,
+      "text": "Backup archives are encrypted with AES-256 before leaving the workstation. Encryption keys are stored separately.",
+      "page_number": 4,
+      "section_heading": "Backup encryption"
+    },
+    {
+      "chunk_id": "account-recovery",
+      "document_id": "access-handbook",
+      "source_path": "handbook/access.pdf",
+      "file_name": "access.pdf",
+      "file_type": "pdf",
+      "chunk_index": 0,
+      "text": "If an employee loses account access, an administrator issues a one-time password reset link after identity verification.",
+      "page_number": 7,
+      "section_heading": "Account recovery"
+    },
+    {
+      "chunk_id": "key-rotation",
+      "document_id": "security-handbook",
+      "source_path": "handbook/security.pdf",
+      "file_name": "security.pdf",
+      "file_type": "pdf",
+      "chunk_index": 1,
+      "text": "Recovery keys must be rotated every 90 days. The security lead schedules key rotation and records completion.",
+      "page_number": 10,
+      "section_heading": "Recovery key rotation"
+    },
+    {
+      "chunk_id": "key-replacement",
+      "document_id": "security-handbook",
+      "source_path": "handbook/security.pdf",
+      "file_name": "security.pdf",
+      "file_type": "pdf",
+      "chunk_index": 2,
+      "text": "To replace a recovery key, the security lead creates a new key, validates a restore, and then revokes the old key.",
+      "page_number": 11,
+      "section_heading": "Recovery key procedure"
+    },
+    {
+      "chunk_id": "emergency-contact",
+      "document_id": "facilities-handbook",
+      "source_path": "handbook/facilities.pdf",
+      "file_name": "facilities.pdf",
+      "file_type": "pdf",
+      "chunk_index": 0,
+      "text": "For a building emergency, call Facilities at 555-0100 and notify the site coordinator.",
+      "page_number": 12,
+      "section_heading": "Emergency contacts"
+    },
+    {
+      "chunk_id": "printer-maintenance",
+      "document_id": "facilities-handbook",
+      "source_path": "handbook/facilities.pdf",
+      "file_name": "facilities.pdf",
+      "file_type": "pdf",
+      "chunk_index": 1,
+      "text": "Printer maintenance includes cleaning the rollers monthly and checking the paper feed.",
+      "page_number": 18,
+      "section_heading": "Printer maintenance"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "exact-keyword-aes-256",
+      "category": "exact_keyword",
+      "query": "Which cipher protects backup archives?",
+      "relevant_chunk_ids": ["backup-encryption"],
+      "answerable": true,
+      "reference_answer": "Backup archives are encrypted with AES-256."
+    },
+    {
+      "case_id": "semantic-account-recovery",
+      "category": "semantic_paraphrase",
+      "query": "I forgot my password and cannot sign in. How is access restored?",
+      "relevant_chunk_ids": ["account-recovery"],
+      "answerable": true,
+      "reference_answer": "An administrator verifies identity and issues a one-time password reset link."
+    },
+    {
+      "case_id": "multi-chunk-key-rotation",
+      "category": "multi_chunk",
+      "query": "How often are recovery keys rotated, and how is an old key replaced?",
+      "relevant_chunk_ids": ["key-rotation", "key-replacement"],
+      "answerable": true,
+      "reference_answer": "Keys are rotated every 90 days; a replacement is validated with a restore before the old key is revoked."
+    },
+    {
+      "case_id": "unsupported-printer-warranty",
+      "category": "unsupported",
+      "query": "How long is the printer warranty?",
+      "relevant_chunk_ids": [],
+      "answerable": false,
+      "reference_answer": "The corpus does not specify a printer warranty."
+    },
+    {
+      "case_id": "page-citation-emergency-contact",
+      "category": "page_citation",
+      "query": "What number should be called for a building emergency, and which page lists it?",
+      "relevant_chunk_ids": ["emergency-contact"],
+      "answerable": true,
+      "reference_answer": "Call Facilities at 555-0100; the information is on page 12.",
+      "expected_page": 12
+    }
+  ]
+}

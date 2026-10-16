@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hybrid-rag"
+version = "0.1.0"
+description = "A phased, document-grounded hybrid retrieval application."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai==2.31.0",
+    "sentence-transformers==6.1.0",
+    "faiss-cpu==1.15.1",
+    "rank-bm25==0.2.2",
+    "pypdf==6.21.0",
+    "python-docx==1.2.0",
+    "python-dotenv==1.2.4",
+    "numpy==2.5.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.1.1", "ruff==0.17.1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["hybrid_rag*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
