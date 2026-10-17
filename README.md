@@ -18,11 +18,42 @@ answer with validated source labels. Ingestion and question answering are
 separate commands. The evaluation runner uses a synthetic corpus and does
 not call Gemini.
 
+### Repository layout
+
+```text
+.
+├── documents/                 # Default input directory (contents are git-ignored)
+├── evaluation/
+│   ├── retrieval_cases.json   # Small, labeled synthetic benchmark
+│   └── results.json           # Generated benchmark report
+├── scripts/                   # Setup, ingestion, rebuild, and evaluation commands
+├── src/hybrid_rag/
+│   ├── cli.py                 # `ask` and `interactive` command-line interface
+│   ├── config.py              # Environment loading and settings validation
+│   ├── schemas.py             # Shared typed document, chunk, and result records
+│   ├── ingestion/             # PDF/DOCX loading, cleaning, chunking, ingestion
+│   ├── indexing/              # Embeddings, FAISS/BM25 persistence, index versions
+│   ├── retrieval/             # Dense, keyword, and hybrid retrieval with RRF
+│   ├── generation/            # Grounded Gemini answer generation and citations
+│   └── services/              # End-to-end retrieval and generation orchestration
+├── tests/                     # Unit and integration tests
+├── .env.example               # Safe configuration template
+├── pyproject.toml             # Package metadata, dependencies, pytest, and Ruff
+└── requirements.txt           # Editable install with development dependencies
+```
+
+At runtime, `data/processed/` holds the chunk snapshot, `data/manifests/`
+holds the ingestion manifest, and `data/indexes/` holds the dense and keyword
+indexes. These generated files are local state and are excluded from version
+control. The project currently provides a CLI and importable Python package;
+it does not include an HTTP server or web interface.
+
 ## Prerequisites and environment setup
 
-Use Python 3.12 (tested baseline), PowerShell on Windows, and internet access
-for dependency and initial embedding-model downloads. A Gemini API key is
-required only for answer generation and authenticated model verification.
+Use Python 3.12 or newer (3.12 is the tested baseline), PowerShell on Windows,
+and internet access for dependency and initial embedding-model downloads. A
+Gemini API key is required only for answer generation and authenticated model
+verification.
 The configured retrieval stack is CPU-first and uses `faiss-cpu`; a host GPU
 does not imply GPU-enabled embeddings or acceleration.
 
@@ -71,6 +102,40 @@ authenticated metadata request (no generation request is made):
 ```powershell
 python scripts\check_setup.py --verify-model
 ```
+
+### Configuration reference
+
+Settings are read from `.env`; values in the process environment take
+precedence. Relative paths are resolved from the project root. Integer
+settings must be valid integers and retrieval limits must be positive.
+`CHUNK_OVERLAP` must be non-negative and smaller than `CHUNK_SIZE`.
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `GEMINI_API_KEY` | unset | Google AI Studio key; required for generation and `--verify-model`, not ingestion or direct retrieval. |
+| `GEMINI_MODEL` | `gemini-3.7-flash` | Exact Gemini model ID; there is no silent model substitution. |
+| `DOCUMENTS_DIR` | `documents` | Existing root directory scanned recursively for source documents. |
+| `PROCESSED_DIR` | `data/processed` | Directory for persisted processed chunks. |
+| `FAISS_INDEX_DIR` | `data/indexes/faiss` | Directory for the dense FAISS index and its chunk mapping. |
+| `BM25_INDEX_DIR` | `data/indexes/bm25` | Directory for the keyword index files. |
+| `MANIFEST_PATH` | `data/manifests/ingestion_manifest.json` | Ingestion manifest with source hashes and processing status. |
+| `EMBEDDING_MODEL` | `sentence-transformers/all-MiniLM-L6-v2` | Fixed sentence-embedding model; other values are rejected. |
+| `CHUNK_SIZE` | `800` | Target chunk size in characters. |
+| `CHUNK_OVERLAP` | `120` | Overlap between adjacent chunks, in characters. |
+| `DENSE_TOP_K` | `10` | Number of dense candidates retrieved before fusion. |
+| `BM25_TOP_K` | `10` | Number of keyword candidates retrieved before fusion. |
+| `FUSION_TOP_K` | `5` | Number of fused results returned. |
+| `RRF_K` | `60` | Reciprocal-rank-fusion smoothing constant. |
+
+In PowerShell, copy the example file once and edit `.env` locally:
+
+```powershell
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
+notepad .env
+```
+
+Do not commit `.env` or put API keys in command history, logs, or source
+files. `.env.example` contains only a placeholder and is safe to share.
 
 The default document input is `documents/`. Add authorized PDFs and DOCX
 files there; this is the sole default source location. Discovery is recursive.
@@ -258,6 +323,29 @@ generation abstention remain unmeasured because the benchmark makes no
 Gemini requests. Expand and review the evaluation set before making
 production-quality or generation-quality claims.
 
+### Development and test coverage
+
+Run the automated checks from the repository root:
+
+```powershell
+python -m ruff check .
+python -m pytest
+```
+
+The test suite covers configuration validation, document loading and
+chunking, persistence and index snapshots, dense and BM25 retrieval, rank
+fusion, hybrid retrieval, Gemini request/citation handling, service behavior,
+the CLI, and the synthetic evaluation. Gemini tests use mocks; the suite
+does not need a Gemini API key or make generation requests. The standalone
+retrieval evaluation does load the configured embedding model and may
+download its weights the first time it runs.
+
+The package is installed in editable mode, so source changes under
+`src/hybrid_rag/` are immediately available to Python. Add new source
+documents only under the configured document directory, and use the
+ingestion/rebuild commands to refresh persisted chunks and both indexes
+together.
+
 ## Privacy and API usage
 
 Document parsing, embedding, indexing, and retrieval run locally after the
@@ -298,17 +386,19 @@ before adding private files elsewhere in the workspace.
   download and confirm the exact configured model remains
   `sentence-transformers/all-MiniLM-L6-v2`.
 
-## Current scope and model verification
+## Implemented capabilities and boundaries
 
-Phases 0 through 12 are implemented: environment/setup checks, validated
-settings and typed records, PDF/DOCX extraction, normalization, chunking,
-JSONL/manifest persistence, exact-model embeddings, dense FAISS retrieval,
-BM25 keyword retrieval, Reciprocal Rank Fusion, hybrid retrieval, grounded
-Gemini generation, service/command-line workflows, and incremental ingestion
-with transactional index publication, plus synthetic retrieval evaluation,
-linting, operational documentation, and final handover guidance. The exact
-configured embedding model was loaded and smoke-tested in the development
-environment (384 dimensions). An authenticated metadata check confirmed
-that `gemini-3.7-flash` supports `generateContent` for the configured key.
-This does not verify generation quality; application tests mock Gemini, and
-no Gemini generation request was made during this work.
+The project includes PDF/DOCX extraction, text cleaning, character-based
+chunking with page and section metadata, JSONL chunk persistence, incremental
+change detection, exact-model embeddings, FAISS dense search, BM25 keyword
+search, reciprocal-rank fusion, grounded Gemini generation with source
+citations, setup checks, and deterministic synthetic retrieval evaluation.
+The configured embedding model produces 384-dimensional vectors.
+
+The application does not include OCR, image understanding, a web interface,
+or an HTTP API. Retrieval is evaluated on a small synthetic dataset; this is
+not evidence of production retrieval quality. Answer faithfulness and
+generation abstention have not been benchmarked, and the automated tests do
+not make Gemini generation requests. Validate the corpus, retrieval quality,
+privacy requirements, model access, and operational capacity for your own
+use case before deployment.
