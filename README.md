@@ -45,8 +45,8 @@ not call Gemini.
 At runtime, `data/processed/` holds the chunk snapshot, `data/manifests/`
 holds the ingestion manifest, and `data/indexes/` holds the dense and keyword
 indexes. These generated files are local state and are excluded from version
-control. The project currently provides a CLI and importable Python package;
-it does not include an HTTP server or web interface.
+control. The project provides a CLI, an importable Python package, and a local
+web workspace for document ingestion, hybrid search, and cited answers.
 
 ## Prerequisites and environment setup
 
@@ -145,6 +145,20 @@ documents. See [documents/README.md](./documents/README.md) for file formats
 and handling details.
 
 ## Current commands
+
+### Local web workspace
+
+Install the project dependencies, configure `.env`, and start the web workspace:
+
+```powershell
+python -m pip install -r requirements.txt
+python -m hybrid_rag.web
+```
+
+Open <http://127.0.0.1:8000>. Add PDF or DOCX files in the Source library;
+the app ingests them and builds the dense and BM25 indexes before they can be
+queried. Answer generation requires a configured `GEMINI_API_KEY`. The server
+binds to localhost and is intended for local demonstrations.
 
 After installing the project, display the CLI help:
 

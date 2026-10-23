@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f6f4">
+    <title>Hybrid RAG | Document workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css?v=2">
+    <script src="/static/app.js?v=2" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Hybrid RAG home">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>hybrid rag<span class="brand-period">.</span></span>
+        </a>
+
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="primary-nav">
+          <button class="nav-link is-active" data-view="workspace" type="button" aria-label="Ask documents" title="Ask documents">
+            <span class="nav-glyph glyph-grid" aria-hidden="true"></span>Ask documents
+          </button>
+          <button class="nav-link" data-view="sources" type="button" aria-label="Source library" title="Source library">
+            <span class="nav-glyph glyph-files" aria-hidden="true"></span>Source library
+            <span class="nav-count" id="nav-document-count">0</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="system-label">SYSTEM STATUS</div>
+          <div class="system-status">
+            <span class="status-dot" id="sidebar-status-dot"></span>
+            <span id="sidebar-status-text">Checking workspace</span>
+          </div>
+          <div class="sidebar-model" id="sidebar-model">Hybrid retrieval</div>
+          <div class="sidebar-footer">LOCAL DOCUMENT WORKSPACE</div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="breadcrumb"><span>Workspace</span><span class="breadcrumb-divider">/</span><strong id="breadcrumb-current">Ask documents</strong></div>
+          <div class="topbar-right">
+            <span class="local-indicator"><span></span>Local environment</span>
+            <button class="avatar" type="button" aria-label="Local workspace">K</button>
+          </div>
+        </header>
+
+        <div class="page-wrap">
+          <section class="page-view is-visible" id="workspace-view" aria-labelledby="page-title">
+            <div class="page-heading">
+              <div>
+                <div class="eyebrow">DOCUMENT INTELLIGENCE</div>
+                <h1 id="page-title">Ask your documents.</h1>
+                <p class="page-description">Answers are grounded in your files, with the evidence kept close.</p>
+              </div>
+              <div class="readiness-pill" id="readiness-pill"><span class="status-dot"></span><span>Checking index</span></div>
+            </div>
+
+            <div class="metrics-row" aria-label="Workspace metrics">
+              <div class="metric"><span class="metric-label">SOURCES</span><strong id="metric-documents">—</strong></div>
+              <div class="metric"><span class="metric-label">INDEXED CHUNKS</span><strong id="metric-chunks">—</strong></div>
+              <div class="metric metric-model"><span class="metric-label">EMBEDDINGS</span><strong id="metric-embedding">—</strong></div>
+              <div class="metric metric-model"><span class="metric-label">ANSWER MODEL</span><strong id="metric-generation">—</strong></div>
+            </div>
+
+            <div class="workspace-grid">
+              <div class="conversation-column">
+                <form class="question-form" id="question-form">
+                  <label for="question-input">Your question</label>
+                  <textarea id="question-input" name="question" rows="3" maxlength="2000" placeholder="Ask something your documents can answer…" required></textarea>
+                  <div class="composer-footer">
+                    <span class="composer-hint"><span class="key-hint">Ctrl ↵</span> Run query</span>
+                    <button class="button button-primary" id="ask-button" type="submit">
+                      <span>Ask question</span><span class="button-arrow" aria-hidden="true">→</span>
+                    </button>
+                  </div>
+                </form>
+
+                <div class="notice" id="workspace-notice" role="status" hidden></div>
+                <section class="response-area" id="response-area" aria-live="polite">
+                  <div class="empty-state" id="empty-state">
+                    <div class="empty-rule"></div>
+                    <div class="empty-kicker">A GROUNDED START</div>
+                    <h2>Your indexed knowledge, in conversation.</h2>
+                    <p>Add PDF or DOCX files to your source library. Once indexed, ask a question and inspect the passages behind each answer.</p>
+                    <button class="text-action" type="button" data-view="sources">Open source library <span aria-hidden="true">→</span></button>
+                  </div>
+                  <div id="answer-content" hidden></div>
+                </section>
+              </div>
+
+              <aside class="method-panel" aria-label="Retrieval workflow">
+                <div class="panel-heading">
+                  <div class="eyebrow">UNDER THE HOOD</div>
+                  <h2>Retrieval path</h2>
+                </div>
+                <ol class="pipeline-list">
+                  <li><span class="pipeline-number">01</span><span><strong>Dense search</strong><small>Meaning-based retrieval</small></span><span class="pipeline-check">✓</span></li>
+                  <li><span class="pipeline-number">02</span><span><strong>BM25 search</strong><small>Keyword relevance</small></span><span class="pipeline-check">✓</span></li>
+                  <li><span class="pipeline-number">03</span><span><strong>Rank fusion</strong><small>Reciprocal rank fusion</small></span><span class="pipeline-check">✓</span></li>
+                  <li><span class="pipeline-number">04</span><span><strong>Grounded answer</strong><small id="pipeline-model">Gemini · citation checked</small></span><span class="pipeline-check">✓</span></li>
+                </ol>
+                <div class="panel-note"><span class="note-mark">i</span><p>Only retrieved excerpts are sent for answer generation. Citations are validated against those sources.</p></div>
+                <div class="index-state" id="index-state">
+                  <span class="index-state-label">INDEX</span>
+                  <strong id="index-state-text">Checking local files…</strong>
+                </div>
+              </aside>
+            </div>
+          </section>
+
+          <section class="page-view" id="sources-view" aria-labelledby="sources-title" hidden>
+            <div class="page-heading sources-heading">
+              <div>
+                <div class="eyebrow">YOUR KNOWLEDGE BASE</div>
+                <h1 id="sources-title">Source library.</h1>
+                <p class="page-description">Manage the documents used by hybrid retrieval.</p>
+              </div>
+              <button class="button button-primary" id="add-files-button" type="button"><span aria-hidden="true">＋</span><span>Add documents</span></button>
+            </div>
+
+            <div class="library-toolbar">
+              <div class="library-count"><strong id="library-count">0 sources</strong><span>PDF and DOCX</span></div>
+              <span class="library-index-state" id="library-index-state">Index status: checking</span>
+            </div>
+
+            <div class="upload-zone" id="upload-zone" tabindex="0" role="button" aria-label="Choose PDF or DOCX documents to upload">
+              <input id="file-input" type="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple hidden>
+              <div class="upload-icon" aria-hidden="true">↑</div>
+              <div><strong>Drop documents here</strong><span>or <button class="inline-button" id="browse-files-button" type="button">browse files</button> · up to 20 MB each</span></div>
+              <div class="upload-formats">PDF&nbsp; / &nbsp;DOCX</div>
+            </div>
+            <div class="notice" id="sources-notice" role="status" hidden></div>
+
+            <div class="source-table-wrap">
+              <table class="source-table">
+                <thead><tr><th>DOCUMENT</th><th>TYPE</th><th>STATUS</th><th>CHUNKS</th></tr></thead>
+                <tbody id="source-rows"></tbody>
+              </table>
+              <div class="table-empty" id="table-empty" hidden>
+                <span class="table-empty-mark">—</span>
+                <strong>No documents yet</strong>
+                <span>Add source files to build your searchable knowledge base.</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
